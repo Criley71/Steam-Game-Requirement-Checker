@@ -14,14 +14,16 @@ namespace SteamReqDesktop.Services {
             var config = new CsvConfiguration(CultureInfo.InvariantCulture) {
                 NewLine = Environment.NewLine,
             };
-            using (var reader = new StreamReader("../../../Data/Blender_CPU_Benchmarks.csv"))
+            string baseFolder = AppContext.BaseDirectory;
+            string fullCpuCsvPath = Path.Combine(baseFolder, "data", "Blender_CPU_Benchmarks.csv");
+            using (var reader = new StreamReader(fullCpuCsvPath))
             using (var csv = new CsvReader(reader, config)) {
                 var records = csv.GetRecords<BenchmarkInfo>();
                 Dictionary<string, double> cpu_results = records.GroupBy(r => r.DeviceName.ToLower()).ToDictionary(g => g.Key.ToLower(), g => g.OrderByDescending(x => x.NumberOfBenchmarks).First().MedianScore);
                 benchmark.LoadCPU(cpu_results);
             }
-          
-            Dictionary<string, double> gpu_results = LoadGpuBenchmarks("../../../Data/dbgpu.csv");
+            string fullGpuCsvPath = Path.Combine(baseFolder, "data", "dbgpu.csv");
+            Dictionary<string, double> gpu_results = LoadGpuBenchmarks(fullGpuCsvPath);
             benchmark.LoadGPU(gpu_results);
 // Console.WriteLine(gpu_results["nvidia geforce rtx 5070 ti"]);
             return benchmark;

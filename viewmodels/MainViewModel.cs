@@ -281,8 +281,8 @@ namespace SteamReqDesktop.ViewModels {
                     IsScanComplete = true;
                     //StatusMessage = GameRequirements.Space_needed_gb.ToString();
                 }
-                catch {
-                    StatusMessage = "Failed to pull Steam data, check URL.";
+                catch (Exception ex){
+                    StatusMessage = $"ERROR: {ex.Message}";
                     _gameRequirements.Game_Name = "Unknown Game";
                 }
             }

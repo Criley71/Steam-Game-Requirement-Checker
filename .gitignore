@@ -1,0 +1,11 @@
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+PublishProfiles/
+*.pubxml.user
+.DS_Store
+Thumbs.db

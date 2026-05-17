@@ -9,11 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\Blender_CPU_Benchmarks.csv" />
+    <None Remove="data\dbgpu.csv" />
     <None Remove="images\cpu_white.png" />
     <None Remove="images\gpu_white.png" />
     <None Remove="images\hd_white.png" />
     <None Remove="images\pc_white.png" />
     <None Remove="images\ram_white.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data\Blender_CPU_Benchmarks.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\dbgpu.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
