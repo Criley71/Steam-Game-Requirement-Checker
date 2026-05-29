@@ -29,7 +29,7 @@ namespace SteamReqDesktop.ViewModels {
         private string _steamUrlInput = "";
 
         [ObservableProperty]
-        private string _statusMessage = "Ready to scan hardware.";
+        private string _statusMessage = "Ready to scan games.";
 
         [ObservableProperty]
         private HardwareSpec _userHardware;
@@ -49,7 +49,77 @@ namespace SteamReqDesktop.ViewModels {
         [ObservableProperty]
         private bool _isShowingSearchResults = false;
         public ObservableCollection<SteamSearchResults> SearchResults { get; set; } = new ObservableCollection<SteamSearchResults>();
+        private string _minCpuIcon;
+        public string MinCpuIcon {
+            get { return _minCpuIcon; }
+            set { _minCpuIcon = value; OnPropertyChanged(nameof(MinCpuIcon)); }
+        }
 
+        private string _minCpuColor;
+        public string MinCpuColor {
+            get { return _minCpuColor; }
+            set { _minCpuColor = value; OnPropertyChanged(nameof(MinCpuColor)); }
+        }
+
+        private string _minGpuIcon;
+        public string MinGpuIcon {
+            get { return _minGpuIcon; }
+            set { _minGpuIcon = value; OnPropertyChanged(nameof(MinGpuIcon)); }
+        }
+
+        private string _minGpuColor;
+        public string MinGpuColor {
+            get { return _minGpuColor; }
+            set { _minGpuColor = value; OnPropertyChanged(nameof(MinGpuColor)); }
+        }
+
+        private string _minRamIcon;
+        public string MinRamIcon {
+            get { return _minRamIcon; }
+            set { _minRamIcon = value; OnPropertyChanged(nameof(MinRamIcon)); }
+        }
+
+        private string _minRamColor;
+        public string MinRamColor {
+            get { return _minRamColor; }
+            set { _minRamColor = value; OnPropertyChanged(nameof(MinRamColor)); }
+        }
+
+        private string _recCpuIcon;
+        public string RecCpuIcon {
+            get { return _recCpuIcon; }
+            set { _recCpuIcon = value; OnPropertyChanged(nameof(RecCpuIcon)); }
+        }
+
+        private string _recCpuColor;
+        public string RecCpuColor {
+            get { return _recCpuColor; }
+            set { _recCpuColor = value; OnPropertyChanged(nameof(RecCpuColor)); }
+        }
+
+        private string _recGpuIcon;
+        public string RecGpuIcon {
+            get { return _recGpuIcon; }
+            set { _recGpuIcon = value; OnPropertyChanged(nameof(RecGpuIcon)); }
+        }
+
+        private string _recGpuColor;
+        public string RecGpuColor {
+            get { return _recGpuColor; }
+            set { _recGpuColor = value; OnPropertyChanged(nameof(RecGpuColor)); }
+        }
+
+        private string _recRamIcon;
+        public string RecRamIcon {
+            get { return _recRamIcon; }
+            set { _recRamIcon = value; OnPropertyChanged(nameof(RecRamIcon)); }
+        }
+
+        private string _recRamColor;
+        public string RecRamColor {
+            get { return _recRamColor; }
+            set { _recRamColor = value; OnPropertyChanged(nameof(RecRamColor)); }
+        }
 
         public ObservableCollection<Storage> Drive_List { get; set; } = new ObservableCollection<Storage>();
         public ObservableCollection<string> Drives_with_space { get; set; } = new ObservableCollection<string>();
@@ -207,20 +277,38 @@ namespace SteamReqDesktop.ViewModels {
 
                     if (minCpuReq == 0) {
                         Cpu_result = "No minimum CPU requirements provided by developer. (Possible abnormal formatting on the steam page)";
+                        MinCpuIcon = "❓";
+                        MinCpuColor = "#ee8407";
                     }
                     else if (UserHardware.CPU_Score >= minCpuReq) {
                         if (recCpuReq == 0) {
                             Cpu_result = "Minimum CPU requirement met (No recommended specs provided or abnormal formatting on the steam page)";
+                            RecCpuIcon = "❓";
+                            RecCpuColor = "#ee8407";
+                            MinCpuIcon = "✅";
+                            MinCpuColor= "#4bb543";
                         }
                         else if (UserHardware.CPU_Score >= recCpuReq) {
                             Cpu_result = "Recommended CPU requirement met";
+                            MinCpuIcon = "✅";
+                            MinCpuColor = "#4bb543";
+                            RecCpuIcon = "✅";
+                            RecCpuColor = "#4bb543";
                         }
                         else {
                             Cpu_result = "Minimum CPU requirement met, did not meet recommended CPU requirements";
+                            MinCpuIcon = "✅";
+                            MinCpuColor = "#4bb543";
+                            RecCpuIcon = "❌";
+                            RecCpuColor = "#F44336";
                         }
                     }
                     else {
                         Cpu_result = "Did not meet Minimum CPU requirements";
+                        MinCpuIcon = "✅";
+                        MinCpuColor = "#4bb543";
+                        RecCpuIcon = "❌";
+                        RecCpuColor = "#F44336";
                     }
 
                     double minGpuReq = GetRequiredScore(_gameRequirements.Min_gpu_brand_score_dict, UserHardware.GPU_Brand);
@@ -228,20 +316,38 @@ namespace SteamReqDesktop.ViewModels {
 
                     if (minGpuReq == 0) {
                         Gpu_result = "No minimum GPU requirements provided by developer. (Possible abnormal formatting on the steam page)";
+                        MinGpuIcon = "❓";
+                        MinGpuColor = "#ee8407";
                     }
                     else if (UserHardware.GPU_Score >= minGpuReq) {
                         if (recGpuReq == 0) {
                             Gpu_result = "Minimum GPU requirement met (No recommended specs provided or abnormal formatting on the steam page)";
+                            MinGpuIcon = "✅";
+                            MinGpuColor = "#4bb543";
+                            RecGpuIcon = "❓";
+                            RecGpuColor = "#ee8407";
                         }
                         else if (UserHardware.GPU_Score >= recGpuReq) {
                             Gpu_result = "Recommended GPU requirement met";
+                            MinGpuIcon = "✅";
+                            MinGpuColor = "#4bb543";
+                            RecGpuIcon = "✅";
+                            RecGpuColor = "#4bb543";
                         }
                         else {
                             Gpu_result = "Minimum GPU requirement met, did not meet recommended GPU requirements";
+                            MinGpuIcon = "✅";
+                            MinGpuColor = "#4bb543";
+                            RecGpuIcon = "❌";
+                            RecGpuColor = "#F44336";
                         }
                     }
                     else {
                         Gpu_result = "Did not meet Minimum GPU requirements";
+                        MinGpuIcon = "❌";
+                        MinGpuColor = "#F44336";
+                        RecGpuIcon = "❌";
+                        RecGpuColor = "#F44336";
                     }
 
                     //Drives_with_space.Add("Hard drives with enough space: ");
@@ -257,21 +363,41 @@ namespace SteamReqDesktop.ViewModels {
                     }
 
                     if (_gameRequirements.Min_ram == 0) {
-                        Ram_result = "No RAM requirements provided by developer. (Possible abnormal formatting on the steam page)\"";
+                        Ram_result = "No RAM requirements provided by developer. (Possible abnormal formatting on the steam page)";
+                        MinRamIcon = "❓";
+                        MinRamColor = "#ee8407";
+                        RecRamIcon = "❓";
+                        RecRamColor = "#ee8407";
                     }
                     else if ((UserHardware.Mem_Size + 2) >= _gameRequirements.Min_ram) {
                         if (_gameRequirements.Rec_ram == 0) {
                             Ram_result = "Minimum RAM requirements met (No recommended specs provided or abnormal formatting on the steam page)";
+                            MinRamIcon = "✅";
+                            MinRamColor = "#4bb543";
+                            RecRamIcon = "❓";
+                            RecRamColor = "#ee8407";
                         }
                         else if ((UserHardware.Mem_Size + 2) >= _gameRequirements.Rec_ram) {
                             Ram_result = "Recommended RAM requirements met";
+                            MinRamIcon = "✅";
+                            MinRamColor = "#4bb543";
+                            RecRamIcon = "✅";
+                            RecRamColor = "#4bb543";
                         }
                         else {
                             Ram_result = "Minimum RAM requirements met, did not meet recommended RAM requirements";
+                            MinRamIcon = "✅";
+                            MinRamColor = "#4bb543";
+                            RecRamIcon = "❌";
+                            RecRamColor = "#F44336";
                         }
                     }
                     else {
                         Ram_result = "Minimum RAM requirements not met";
+                        MinRamIcon = "❌";
+                        MinRamColor = "#F44336";
+                        RecRamIcon = "❌";
+                        RecRamColor = "#F44336";
                     }
 
 

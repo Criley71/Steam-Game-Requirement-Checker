@@ -7,227 +7,279 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
-    <StackPanel Margin="20">
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Image Source="/images/pc_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                    <TextBlock Text="Your System" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Image Source="/images/cpu_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                    <TextBlock>
+        <StackPanel Grid.Column="0" Margin="0,0,20,0">
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Source="/images/pc_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                <TextBlock Text="Your System" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Source="/images/cpu_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                <TextBlock>
                     <Run Text="CPU: " FontWeight="Bold" FontSize="16" />
                     <Run Text="{Binding UserHardware.CPU_print_name}" FontSize="16" />
-                    </TextBlock>
-
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Image Source="/images/gpu_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                    <TextBlock>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Source="/images/gpu_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                <TextBlock>
                     <Run Text="GPU: " FontWeight="Bold" FontSize="16" />
-                    <Run Text="{Binding UserHardware.GPU_print_name}" FontSize="16" />                  
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Image Source="/images/ram_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                    <TextBlock>
+                    <Run Text="{Binding UserHardware.GPU_print_name}" FontSize="16" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Source="/images/ram_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                <TextBlock>
                     <Run Text="Ram:" FontWeight="Bold" FontSize="16" />
-                    <Run Text="{Binding UserHardware.Mem_Size, StringFormat=' {0} GB'}" FontSize="16" />      
-                    </TextBlock>
-                    
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Image Source="/images/hd_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-                    <TextBlock Text="Storage Drives:" FontWeight="Bold" Margin="0,15,0,5" />
-                </StackPanel>
-                <ItemsControl ItemsSource="{Binding UserHardware.Drive_List}" 
+                    <Run Text="{Binding UserHardware.Mem_Size, StringFormat=' {0} GB'}" FontSize="16" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Source="/images/hd_white.png" Width="32" Height="32" Margin="0,0,8,0" SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
+                <TextBlock Text="Storage Drives:" FontWeight="Bold" Margin="0,15,0,5" />
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding UserHardware.Drive_List}" 
                          BorderThickness="0" 
                          Background="Transparent"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                                <TextBlock Text="{Binding DriveLetter, StringFormat='Drive {0}'}" FontWeight="Bold" Width="60" Foreground="WhiteSmoke"/>
-                                <TextBlock Text="{Binding FreeSpace, StringFormat='{}{0:N2} GB Free'}" Foreground="WhiteSmoke" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                            <TextBlock Text="{Binding DriveLetter, StringFormat='Drive {0}'}" FontWeight="Bold" Width="60" Foreground="WhiteSmoke"/>
+                            <TextBlock Text="{Binding FreeSpace, StringFormat='{}{0:N2} GB Free'}" Foreground="WhiteSmoke" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Enter Steam Game URL or Search for a Game:" FontWeight="Bold" />
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" >
+                <ui:TextBox Text="{Binding SteamUrlInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,10" Padding="2" Height="32" RenderTransformOrigin="0.501,0.487" HorizontalAlignment="Stretch" Width="685">
+                    <ui:TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding RunScanCommand}" />
+                    </ui:TextBox.InputBindings>
+                </ui:TextBox>
+                <ui:Button Content="Search Games" Command="{Binding RunScanCommand}" Padding="5" Margin="10,0,0,6" Height="31" FontSize="16" Width="149" Icon="{ui:SymbolIcon Symbol='Search12'}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
+            <ListBox Grid.Row="2" ItemsSource="{Binding SearchResults}" 
+                     Visibility="{Binding IsShowingSearchResults, Converter={StaticResource BoolToVis}}" 
+                     MaxHeight="400" 
+                     Margin="0,3,0,3" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Background" Value="#16212e" />
+                        <Setter Property="BorderBrush" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#afcbdf" />
+                                <Setter Property="Foreground" Value="#3e4b54" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#afcbdf" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Transparent">
+                            <Grid.InputBindings>
+                                <MouseBinding Gesture="LeftClick" 
+                                      Command="{Binding DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                      CommandParameter="{Binding AppID}"/>
+                            </Grid.InputBindings>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Image Source="{Binding ImageURL}" Width="120" Height="45" Margin="0,0,10,0" />
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" FontSize="16" Foreground="WhiteSmoke" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
-                <TextBlock Text="Enter Steam Game URL or Search for a Game:" FontWeight="Bold" />
-                <StackPanel Orientation="Horizontal" >
-                    <ui:TextBox Text="{Binding SteamUrlInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,10" Padding="2" Width="685" Height="32" RenderTransformOrigin="0.501,0.487" HorizontalAlignment="Center">
-                        <ui:TextBox.InputBindings>
-                            <KeyBinding Key="Enter" Command="{Binding RunScanCommand}" />
-                        </ui:TextBox.InputBindings>
-                    </ui:TextBox>
-                    <ui:Button Content="Search Games" Command="{Binding RunScanCommand}" Padding="5" Margin="10,0,0,6" Height="31" FontSize="16" Width="149" Icon="{ui:SymbolIcon Symbol='Search12'}"/>
-                </StackPanel>
+            <TextBlock Grid.Row="3" Text="{Binding StatusMessage}" Margin="0,10,0,20" FontStyle="Italic" Foreground="WhiteSmoke" />
 
-                <ListBox ItemsSource="{Binding SearchResults}" 
-                         Visibility="{Binding IsShowingSearchResults, Converter={StaticResource BoolToVis}}" 
-                         MaxHeight="400" 
-                         Margin="0,3,0,3" 
-                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid Grid.Row="4" Visibility="{Binding IsScanComplete, Converter={StaticResource BoolToVis}}" 
+                  Margin="0,0,0,20">
 
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="Background" Value="#16212e" />
-                            <Setter Property="BorderBrush" Value="Transparent" />
-                            <Setter Property="BorderThickness" Value="1" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#afcbdf" />
-                                    <Setter Property="Foreground" Value="#3e4b54" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#afcbdf" />
-                                    <Setter Property="Foreground" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
+                <Border CornerRadius="10" Background="#15FFFFFF">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Opacity="0.4" BlurRadius="15" ShadowDepth="5" Direction="270" />
+                    </Border.Effect>
+                </Border>
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Background="Transparent">
-                                <Grid.InputBindings>
-                                    <MouseBinding Gesture="LeftClick" 
-                                  Command="{Binding DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
-                                  CommandParameter="{Binding AppID}"/>
-                                </Grid.InputBindings>
-                                <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Image Source="{Binding ImageURL}" Width="120" Height="45" Margin="0,0,10,0" />
-                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" FontSize="16" Foreground="WhiteSmoke" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Border CornerRadius="10" BorderBrush="#30FFFFFF" BorderThickness="1" Padding="30">
 
-                <TextBlock Text="{Binding StatusMessage}" Margin="0,10,0,20" FontStyle="Italic" Foreground="WhiteSmoke" />
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="0,0,15,0">
 
-                <Grid Visibility="{Binding IsScanComplete, Converter={StaticResource BoolToVis}}" 
-                      HorizontalAlignment="Left" 
-                      MaxWidth="900" 
-                      Margin="0,0,0,20" Width="685">
+                        <StackPanel>
+                            <Image Source="{Binding GameRequirements.Game_image_url, FallbackValue={x:Null}, TargetNullValue={x:Null}}" 
+                                           Width="562" Height="174" Margin="0,0,0,5" HorizontalAlignment="Center" 
+                                           SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
 
-                    <Border CornerRadius="10" Background="#15FFFFFF">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Opacity="0.4" BlurRadius="15" ShadowDepth="5" Direction="270" />
-                        </Border.Effect>
-                    </Border>
+                            <TextBlock Text="{Binding GameRequirements.Game_Name}" TextAlignment="Center" Padding="2" FontWeight="Bold" FontSize="32" Margin="0,0,0,30" Foreground="WhiteSmoke"/>
+                            <Rectangle Height="1" Fill="#30FFFFFF" Margin="0,0,0,20" HorizontalAlignment="Stretch"/>
+                            <Grid Margin="0,0,0,40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                    <Border CornerRadius="10" BorderBrush="#30FFFFFF" BorderThickness="1" Padding="30" HorizontalAlignment="Left" Width="685">
+                                <Rectangle Grid.Column="1" Width="1" Fill="#30FFFFFF" Margin="20,0,20,0" />
 
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="550" Padding="0,0,15,0">
+                                <StackPanel Grid.Column="0" Margin="10,0,20,0">
+                                    <TextBlock FontSize="16" FontWeight="Bold" Margin="0,0,0,10"
+                   Text="Minimum Requirements" Foreground="WhiteSmoke"
+                   HorizontalAlignment="Center" TextAlignment="Center"/>
 
-                            <StackPanel>
-                                <Image Source="{Binding GameRequirements.Game_image_url, FallbackValue={x:Null}, TargetNullValue={x:Null}}" 
-                                       Width="562" Height="174" Margin="0,0,0,5" HorizontalAlignment="Center" 
-                                       SnapsToDevicePixels="True" UseLayoutRounding="True" RenderOptions.BitmapScalingMode="HighQuality" />
-
-                                <TextBlock Text="{Binding GameRequirements.Game_Name}" TextAlignment="Center" Padding="2" FontWeight="Bold" FontSize="32" Margin="0,0,0,30" Foreground="WhiteSmoke"/>
-
-                                <Grid Margin="0,0,0,40">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
-                                        <TextBlock FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Text="Minimum Requirements" Foreground="WhiteSmoke"/>
-
-                                        <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="CPUs:" Foreground="WhiteSmoke"/>
-                                        <ItemsControl ItemsSource="{Binding GameRequirements.min_cpu_names}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-
-                                        <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="GPUs:" Foreground="WhiteSmoke"/>
-                                        <ItemsControl ItemsSource="{Binding GameRequirements.min_gpu_names}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-
-                                        <TextBlock Margin="0,5,0,0" Foreground="WhiteSmoke">
-                                            <Run Text="RAM: " FontWeight="Bold" />
-                                            <Run Text="{Binding GameRequirements.Min_ram, StringFormat='{}{0} GB'}" />
-                                        </TextBlock>
-
-                                        <TextBlock Text="{Binding GameRequirements.DisplayStorage}" Foreground="WhiteSmoke"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1" Margin="20,0,0,0">
-                                        <TextBlock FontSize="16" FontWeight="Bold" Margin="0,0,0,10" Text="Recommended Requirements" Foreground="WhiteSmoke"/>
-
-                                        <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="CPUs:" Foreground="WhiteSmoke"/>
-                                        <ItemsControl ItemsSource="{Binding GameRequirements.rec_cpu_names}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-
-                                        <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="GPUs:" Foreground="WhiteSmoke"/>
-                                        <ItemsControl ItemsSource="{Binding GameRequirements.rec_gpu_names}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-
-                                        <TextBlock Margin="0,5,0,0" Foreground="WhiteSmoke">
-                                            <Run Text="RAM: " FontWeight="Bold" />
-                                            <Run Text="{Binding GameRequirements.Rec_ram, StringFormat='{}{0} GB'}" />
-                                        </TextBlock>
-
-                                        <TextBlock Text="{Binding GameRequirements.DisplayStorage}" Foreground="WhiteSmoke"/>
-                                    </StackPanel>
-                                </Grid>
-
-                                <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Text="Results" TextAlignment="Center" Foreground="WhiteSmoke"/>
-
-                                    <TextBlock FontWeight="SemiBold" Margin="0,5,0,0" Text="{Binding Cpu_result}" TextAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                    <TextBlock FontWeight="SemiBold" Margin="0,5,0,0" Text="{Binding Gpu_result}" TextAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                    <TextBlock FontWeight="SemiBold" Margin="0,5,0,0" Text="{Binding Ram_result}" TextAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-
-                                    <TextBlock FontWeight="SemiBold" Margin="0,15,0,5" Text="Hard drives with enough space:" TextAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
-                                    <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding Drives_with_space}">
+                                    <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="CPUs:" Foreground="WhiteSmoke"/>
+                                    <ItemsControl ItemsSource="{Binding GameRequirements.min_cpu_names}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <TextBlock HorizontalAlignment="Center" Margin="0,2,0,0" Text="{Binding}" Foreground="WhiteSmoke"/>
+                                                <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
+
+                                    <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="GPUs:" Foreground="WhiteSmoke"/>
+                                    <ItemsControl ItemsSource="{Binding GameRequirements.min_gpu_names}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock Margin="0,5,0,0" Foreground="WhiteSmoke" FontSize="16">
+                                    <Run Text="RAM: " FontWeight="Bold" />
+                                    <Run Text="{Binding GameRequirements.Min_ram, StringFormat='{}{0} GB'}" />
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding GameRequirements.DisplayStorage}" Foreground="WhiteSmoke"/>
                                 </StackPanel>
 
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Border>
-                </Grid>
+                                <!-- NOTE: Grid.Column is now "2" instead of "1" -->
+                                <StackPanel Grid.Column="2" Margin="20,0,10,0">
+                                    <TextBlock FontSize="16" FontWeight="Bold" Margin="0,0,0,10"
+                   Text="Recommended Requirements" Foreground="WhiteSmoke"
+                   HorizontalAlignment="Center" TextAlignment="Center"/>
 
-            </StackPanel>
+                                    <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="CPUs:" Foreground="WhiteSmoke"/>
+                                    <ItemsControl ItemsSource="{Binding GameRequirements.rec_cpu_names}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock FontWeight="Bold" Margin="0,5,0,0" Text="GPUs:" Foreground="WhiteSmoke"/>
+                                    <ItemsControl ItemsSource="{Binding GameRequirements.rec_gpu_names}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock Margin="0,5,0,0" Foreground="WhiteSmoke" FontSize="16">
+                                    <Run Text="RAM: " FontWeight="Bold" />
+                                    <Run Text="{Binding GameRequirements.Rec_ram, StringFormat='{}{0} GB'}" />
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding GameRequirements.DisplayStorage}" Foreground="WhiteSmoke"/>
+                                </StackPanel>
+                            </Grid>
+                                <Rectangle Height="1" Fill="#30FFFFFF" Margin="0,0,0,20" HorizontalAlignment="Stretch" />
+                            <StackPanel HorizontalAlignment="Center" Margin="0,10,0,10">
+                                <TextBlock FontSize="18" FontWeight="Bold" Margin="0,0,0,5" Text="Results" TextAlignment="Center" Foreground="WhiteSmoke"/>
+
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.Resources>
+                                        <Style x:Key="IconTooltipStyle" TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="20"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="TextAlignment" Value="Center"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="Margin" Value="0,10,0,10"/>
+
+                                            <Style.Triggers>
+                                                <Trigger Property="Text" Value="✅">
+                                                    <Setter Property="ToolTip" Value="Requirement Met" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="❌">
+                                                    <Setter Property="ToolTip" Value="Requirement Not Met" />
+                                                </Trigger>
+                                                <Trigger Property="Text" Value="❓">
+                                                    <Setter Property="ToolTip" Value="Requirement Unknown or Not Provided" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="90" />
+                                        <ColumnDefinition Width="90" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="CPU" FontWeight="Bold" TextAlignment="Center" Foreground="WhiteSmoke" Margin="0,0,0,10"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="GPU" FontWeight="Bold" TextAlignment="Center" Foreground="WhiteSmoke" Margin="0,0,0,10"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="3" Text="RAM" FontWeight="Bold" TextAlignment="Center" Foreground="WhiteSmoke" Margin="0,0,0,10"/>
+
+                                    <Border Grid.Row="1" Grid.ColumnSpan="4" BorderBrush="#30FFFFFF" BorderThickness="0,1,0,0" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Minimum:" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="0,10,0,10"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding MinCpuIcon}" Foreground="{Binding MinCpuColor}" Style="{StaticResource IconTooltipStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding MinGpuIcon}" Foreground="{Binding MinGpuColor}" Style="{StaticResource IconTooltipStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding MinRamIcon}" Foreground="{Binding MinRamColor}" Style="{StaticResource IconTooltipStyle}"/>
+
+                                    <Border Grid.Row="2" Grid.ColumnSpan="4" BorderBrush="#30FFFFFF" BorderThickness="0,1,0,0" />
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Recommended:" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="0,10,0,10"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding RecCpuIcon}" Foreground="{Binding RecCpuColor}" Style="{StaticResource IconTooltipStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding RecGpuIcon}" Foreground="{Binding RecGpuColor}" Style="{StaticResource IconTooltipStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding RecRamIcon}" Foreground="{Binding RecRamColor}" Style="{StaticResource IconTooltipStyle}"/>
+                                </Grid>
+
+                                <TextBlock FontWeight="SemiBold" Margin="0,25,0,5" Text="Hard drives with enough space:" TextAlignment="Center" TextWrapping="Wrap" Foreground="WhiteSmoke"/>
+                                <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding Drives_with_space}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock HorizontalAlignment="Center" Margin="0,2,0,0" Text="{Binding}" Foreground="WhiteSmoke"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+
         </Grid>
-    </StackPanel>
+    </Grid>
 </Window>
